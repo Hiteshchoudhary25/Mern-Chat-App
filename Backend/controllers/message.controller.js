@@ -25,7 +25,7 @@ export const sendMessage = async (req, res) => {
 			receiverId,
 			message,
 		});
-        // conversation.messages.push(newMessage);
+        conversation.messages.push(newMessage);
 
 		if (newMessage) {
 			conversation.messages.push(newMessage._id);
@@ -59,9 +59,9 @@ export const getMessage = async(req, res) =>{
             participants: { $all: [senderId, userToChatId] }
         }).populate("messages"); // Corrected to `messages`
 
-        if (!conversation) {
-            return res.status(404).json({ error: "Conversation not found" });
-        }
+        // if (!conversation) {
+        //     return res.status(404).json({ error: "Conversation not found" });
+        // }
 
         res.status(200).json(conversation.messages);
     } catch (error) {
